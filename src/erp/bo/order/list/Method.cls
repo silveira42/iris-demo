@@ -47,8 +47,6 @@ ClassMethod Execute(pHost As erp.bo.order.Operation, pRequest As erp.bo.order.li
         Return exception.AsStatus()
     }
 
-	$$$LOGINFO(dynamicResponse.%ToJSON())
-
     Set iterator = dynamicResponse.%GetIterator()
     While iterator.%GetNext(.key, .value)
     {
