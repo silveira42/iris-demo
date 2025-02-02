@@ -18,6 +18,9 @@ Method OnProcessInput(pRequest As core.bs.product.list.Request, Output pResponse
 	{
 		Set bpRequest = ##class(erp.bp.product.list.Request).%New()
 
+		Set bpRequest.Limit = pRequest.Limit
+		Set bpRequest.Skip = pRequest.Skip
+
 		$$$ThrowOnError(..SendRequestSync("Erp Product List", bpRequest, .bpResponse))
 	}
 	Catch (exception)
@@ -32,7 +35,11 @@ Method OnProcessInput(pRequest As core.bs.product.list.Request, Output pResponse
 	Try
 	{
 		Set pResponse.Status = ##class(%CSP.REST).#HTTP200OK
-		Set pResponse.Body = ##class(core.model.Product).ListToString(bpResponse.Products)
+		Set responseBody = {}
+		Set responseBody.products = ##class(core.model.Product).ListToDynamicArray(bpResponse.Products)
+		Set responseBody.total = bpResponse.Products.Count()
+
+		Set pResponse.Body = responseBody.%ToJSON()
 	}
 	Catch (exception)
 	{

@@ -14,7 +14,10 @@ Method OnRequest(pRequest As erp.bp.product.list.Request, Output pResponse As er
 
 	Try
 	{
-		Set listedProducts = ..ListProducts()
+		Set limit = pRequest.Limit
+		Set skip = pRequest.Skip
+
+		Set listedProducts = ..ListProducts(limit, skip)
 	}
 	Catch (exception)
 	{
@@ -39,9 +42,15 @@ Method OnRequest(pRequest As erp.bp.product.list.Request, Output pResponse As er
 	Return $$$OK
 }
 
-Method ListProducts() As %Library.ListOfObjects
+Method ListProducts(pLimit As %Library.Integer, pSkip As %Library.Integer) As %Library.ListOfObjects
 {
 	Set erpListReq = ##class(erp.bo.product.list.Request).%New()
+
+	Set limit = pLimit
+	Set skip = pSkip
+
+	Set erpListReq.Limit = limit
+	Set erpListReq.Skip = skip
 
 	$$$ThrowOnError(..SendRequestSync("Erp Product", erpListReq, .erpListResp))
 	#Dim erpListResp As erp.bo.product.list.Response

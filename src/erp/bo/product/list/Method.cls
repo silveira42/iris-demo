@@ -21,7 +21,7 @@ ClassMethod Execute(pHost As erp.bo.product.Operation, pRequest As erp.bo.produc
     Set httpRequest.ContentType = "application/json"
 	Do httpRequest.SetHeader("Api-Token", pHost.Token)
 
-    Set url = pHost.BaseUrl _ "/products"
+    Set url = pHost.BaseUrl _ "/products?limit=" _ pRequest.Limit _ "&skip=" _ pRequest.Skip
 
     // Enviar request REST
     Try

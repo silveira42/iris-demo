@@ -1,21 +1,21 @@
 Class erp.model.Product Extends (%Library.SerialObject, %XML.Adaptor, %JSON.Adaptor)
 {
 
-Property Id As %Library.String(%JSONFIELDNAME = "id");
+Property Id As %Library.String(%JSONFIELDNAME = "id", MAXLEN = "");
 
-Property Title As %Library.String(%JSONFIELDNAME = "title");
+Property Title As %Library.String(%JSONFIELDNAME = "title", MAXLEN = "");
 
-Property Description As %Library.String(%JSONFIELDNAME = "description");
+Property Description As %Library.String(%JSONFIELDNAME = "description", MAXLEN = "");
 
 Property Price As %Library.Float(%JSONFIELDNAME = "price");
 
-Property Thumbnail As %Library.String(%JSONFIELDNAME = "thumbnail");
+Property Thumbnail As %Library.String(%JSONFIELDNAME = "thumbnail", MAXLEN = "");
 
-Property SKU As %Library.String(%JSONFIELDNAME = "sku");
+Property SKU As %Library.String(%JSONFIELDNAME = "sku", MAXLEN = "");
 
-Property CreatedAt As %Library.String(%JSONFIELDNAME = "createdAt");
+Property CreatedAt As %Library.String(%JSONFIELDNAME = "createdAt", MAXLEN = "");
 
-Property UpdatedAt As %Library.String(%JSONFIELDNAME = "updatedAt");
+Property UpdatedAt As %Library.String(%JSONFIELDNAME = "updatedAt", MAXLEN = "");
 
 ClassMethod FromDynamicObject(pObject As %Library.DynamicObject) As erp.model.Product
 {
@@ -24,7 +24,7 @@ ClassMethod FromDynamicObject(pObject As %Library.DynamicObject) As erp.model.Pr
 	Set product.Title = pObject.title
 	Set product.Description = pObject.description
 	Set product.Price = pObject.price
-	Set product.Thumbnail = pObject.thumnail
+	Set product.Thumbnail = pObject.thumbnail
 	Set product.SKU = pObject.sku
 	Set product.CreatedAt = pObject.createdAt
 	Set product.UpdatedAt = pObject.updatedAt

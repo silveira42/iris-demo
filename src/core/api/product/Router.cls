@@ -67,6 +67,39 @@ ClassMethod ListProducts() As %Library.Status
 
 		Set bsRequest = ##class(core.bs.product.list.Request).%New()
 
+		Set param = ""
+
+		For
+		{
+			Set param = %request.Next(param)
+
+			If (param = "")
+			{
+				Quit
+			}
+
+			Set value = %request.Data(param,1)
+			If (param = "limit")
+			{
+				Set bsRequest.Limit = value
+
+				Continue
+			}
+			ElseIf (param = "skip")
+			{
+				Set bsRequest.Skip = value
+
+				Continue
+			}
+			Else
+			{
+				Set %response.Status = ..#HTTP400BADREQUEST
+				Write "Invalid parameter."
+
+				Return $$$OK
+			}
+		}
+
 		$$$ThrowOnError(businessService.ProcessInput(bsRequest, .bsResponse))
 		#Dim bsResponse As core.bs.product.list.Response
 

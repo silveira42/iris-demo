@@ -1,19 +1,19 @@
 Class core.model.Order Extends (%Library.SerialObject, %XML.Adaptor, %JSON.Adaptor)
 {
 
-Property Id As %Library.String(%JSONFIELDNAME = "id");
+Property Id As %Library.String(%JSONFIELDNAME = "id", MAXLEN = "");
 
-Property Customer As %Library.String(%JSONFIELDNAME = "customer");
+Property Customer As %Library.String(%JSONFIELDNAME = "customer", MAXLEN = "");
 
-Property DeliveryCEP As %Library.String(%JSONFIELDNAME = "deliveryCEP");
+Property DeliveryCEP As %Library.String(%JSONFIELDNAME = "deliveryCEP", MAXLEN = "");
 
-Property ProductId As %Library.String(%JSONFIELDNAME = "productId");
+Property ProductId As %Library.String(%JSONFIELDNAME = "productId", MAXLEN = "");
 
 Property Quantity As %Library.Integer(%JSONFIELDNAME = "quantity");
 
 Property Total As %Library.Float(%JSONFIELDNAME = "total");
 
-Property CreatedAt As %Library.String(%JSONFIELDNAME = "createdAt");
+Property CreatedAt As %Library.String(%JSONFIELDNAME = "createdAt", MAXLEN = "");
 
 ClassMethod FromDynamicObject(pObject As %Library.DynamicObject) As erp.model.Order
 {
