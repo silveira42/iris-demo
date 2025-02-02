@@ -29,6 +29,39 @@ ClassMethod FromDynamicObject(pObject As %Library.DynamicObject) As erp.model.Or
 	Return order
 }
 
+ClassMethod FromString(pString As %Library.String) As erp.model.Order
+{
+	Set order = ##class(erp.model.Order).%New()
+	Set status = order.%JSONImport(pString)
+
+	Return order
+}
+
+Method ToString() As %Library.String
+{
+	Do ##this.%JSONExportToString(.string)
+
+	Return string
+}
+
+ClassMethod ListToString(pList As %Library.ListOfObjects) As %Library.String
+{
+	Set list = pList
+
+	Set fullString = "["
+
+	For i=1:1:list.Count()
+	{
+		Set order = list.GetAt(i)
+		Set status = order.%JSONExportToString(.string)
+		Set fullString = fullString _ string _ ", "
+	}
+
+	Set fullString = $EXTRACT(fullString, 1, $LENGTH(fullString)-2) _ "]"
+
+	Return fullString
+}
+
 Storage Default
 {
 <Data name="OrderState">
