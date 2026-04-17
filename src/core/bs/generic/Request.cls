@@ -1,3 +1,4 @@
+/// Changed the request class
 Class core.bs.generic.Request Extends Ens.Request
 {
 
